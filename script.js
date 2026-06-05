@@ -1,32 +1,109 @@
 const players = [];
 
-const tiers = [
-    "HT1","LT1",
-    "HT2","LT2",
-    "HT3","LT3",
-    "HT4","LT4",
-    "HT5","LT5"
+const gamemodes = [
+    "Overall",
+    "LTMs",
+    "Vanilla",
+    "UHC",
+    "Pot",
+    "NethOP",
+    "SMP",
+    "DSMP",
+    "Sword",
+    "Axe",
+    "Mace"
 ];
 
-for(let i=1;i<=5000;i++){
+let currentMode = "Overall";
 
-    players.push({
-        rank:i,
-        name:"Player"+i,
-        rating:5000-i,
-        tier:tiers[Math.floor(Math.random()*tiers.length)]
-    });
-
-}
-
-function render(list){
+function renderLeaderboard() {
 
     const leaderboard =
     document.getElementById("leaderboard");
 
-    leaderboard.innerHTML="";
+    leaderboard.innerHTML = "";
 
-    list.forEach(player=>{
+    for(let rank = 1; rank <= 100; rank++) {
+
+        const player =
+        players.find(p =>
+            p.rank === rank &&
+            p.mode === currentMode
+        );
+
+        if(player) {
+
+            leaderboard.innerHTML += `
+            <div class="player">
+                <div class="rank">#${rank}</div>
+                <div class="name">${player.name}</div>
+                <div class="tier">${player.tier}</div>
+            </div>
+            `;
+
+        } else {
+
+            leaderboard.innerHTML += `
+            <div class="player empty">
+                <div class="rank">#${rank}</div>
+                <div class="name">EMPTY</div>
+                <div class="tier">---</div>
+            </div>
+            `;
+        }
+    }
+}
+
+function switchMode(mode){
+
+    currentMode = mode;
+
+    document
+    .querySelectorAll(".tab")
+    .forEach(tab =>
+        tab.classList.remove("active")
+    );
+
+    document
+    .querySelector(`[data-mode="${mode}"]`)
+    .classList.add("active");
+
+    renderLeaderboard();
+}
+
+document
+.getElementById("search")
+.addEventListener("input", e => {
+
+    const value =
+    e.target.value.toLowerCase();
+
+    const leaderboard =
+    document.getElementById("leaderboard");
+
+    leaderboard.innerHTML = "";
+
+    const results =
+    players.filter(player =>
+        player.name
+        .toLowerCase()
+        .includes(value)
+    );
+
+    if(results.length === 0){
+
+        leaderboard.innerHTML = `
+        <div class="player empty">
+            <div class="rank">-</div>
+            <div class="name">No Players Found</div>
+            <div class="tier">---</div>
+        </div>
+        `;
+
+        return;
+    }
+
+    results.forEach(player => {
 
         leaderboard.innerHTML += `
         <div class="player">
@@ -38,29 +115,6 @@ function render(list){
 
     });
 
-}
-
-render(players.slice(0,100));
-
-document
-.getElementById("search")
-.addEventListener("input", e=>{
-
-    const value =
-    e.target.value.toLowerCase();
-
-    if(value===""){
-        render(players.slice(0,100));
-        return;
-    }
-
-    const results =
-    players.filter(player =>
-        player.name
-        .toLowerCase()
-        .includes(value)
-    );
-
-    render(results);
-
 });
+
+renderLeaderboard();
