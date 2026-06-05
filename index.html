@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -6,47 +7,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Star Tiers</title>
 
-    <link rel="stylesheet" href="style.css">
+```
+<link rel="stylesheet" href="style.css">
+```
+
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="logo">⭐ Star Tiers</div>
+```
+<nav class="navbar">
+    <div class="logo">⭐ Star Tiers</div>
 
-        <input
-            type="text"
-            id="search"
-            class="search"
-            placeholder="Search player..."
-        >
-    </nav>
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search player..."
+    >
+</nav>
 
-    <div class="container">
+<div class="container">
 
-        <div class="tabs">
+    <div class="tabs">
 
-            <button class="tab active" data-mode="Overall" onclick="switchMode('Overall')">Overall</button>
-            <button class="tab" data-mode="LTMs" onclick="switchMode('LTMs')">LTMs</button>
-            <button class="tab" data-mode="Vanilla" onclick="switchMode('Vanilla')">Vanilla</button>
-            <button class="tab" data-mode="UHC" onclick="switchMode('UHC')">UHC</button>
-            <button class="tab" data-mode="Pot" onclick="switchMode('Pot')">Pot</button>
-            <button class="tab" data-mode="NethOP" onclick="switchMode('NethOP')">NethOP</button>
-            <button class="tab" data-mode="SMP" onclick="switchMode('SMP')">SMP</button>
-            <button class="tab" data-mode="DSMP" onclick="switchMode('DSMP')">DSMP</button>
-            <button class="tab" data-mode="Sword" onclick="switchMode('Sword')">Sword</button>
-            <button class="tab" data-mode="Axe" onclick="switchMode('Axe')">Axe</button>
-            <button class="tab" data-mode="Mace" onclick="switchMode('Mace')">Mace</button>
+        <button class="tab active" data-mode="Overall" onclick="switchMode('Overall')">
+            🏆 Overall
+        </button>
 
-        </div>
+        <button class="tab" data-mode="LTMs" onclick="switchMode('LTMs')">
+            ⚔️ LTMs
+        </button>
 
-        <h1 class="title">Top 100 Players</h1>
+        <button class="tab" data-mode="Vanilla" onclick="switchMode('Vanilla')">
+            🌍 Vanilla
+        </button>
 
-        <div id="leaderboard"></div>
+        <button class="tab" data-mode="UHC" onclick="switchMode('UHC')">
+            ❤️ UHC
+        </button>
+
+        <button class="tab" data-mode="Pot" onclick="switchMode('Pot')">
+            🧪 Pot
+        </button>
+
+        <button class="tab" data-mode="NethOP" onclick="switchMode('NethOP')">
+            🔥 NethOP
+        </button>
+
+        <button class="tab" data-mode="SMP" onclick="switchMode('SMP')">
+            🌲 SMP
+        </button>
+
+        <button class="tab" data-mode="DSMP" onclick="switchMode('DSMP')">
+            💎 DSMP
+        </button>
+
+        <button class="tab" data-mode="Sword" onclick="switchMode('Sword')">
+            <img src="https://i.imgur.com/DwCUkDC.png" class="tab-icon" alt="Sword">
+            Sword
+        </button>
+
+        <button class="tab" data-mode="Axe" onclick="switchMode('Axe')">
+            🪓 Axe
+        </button>
+
+        <button class="tab" data-mode="Mace" onclick="switchMode('Mace')">
+            🔨 Mace
+        </button>
 
     </div>
 
-    <script src="script.js"></script>
+    <h1 class="title">Top 100 Players</h1>
+
+    <div id="leaderboard"></div>
+
+</div>
+
+<script src="script.js"></script>
+```
 
 </body>
+
 </html>
