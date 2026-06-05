@@ -18,20 +18,17 @@ let currentMode = "Overall";
 
 function renderLeaderboard() {
 
-    const leaderboard =
-    document.getElementById("leaderboard");
+    const leaderboard = document.getElementById("leaderboard");
 
     leaderboard.innerHTML = "";
 
-    for(let rank = 1; rank <= 100; rank++) {
+    for (let rank = 1; rank <= 100; rank++) {
 
-        const player =
-        players.find(p =>
-            p.rank === rank &&
-            p.mode === currentMode
+        const player = players.find(
+            p => p.rank === rank && p.mode === currentMode
         );
 
-        if(player) {
+        if (player) {
 
             leaderboard.innerHTML += `
             <div class="player">
@@ -54,43 +51,45 @@ function renderLeaderboard() {
     }
 }
 
-function switchMode(mode){
+function switchMode(mode) {
 
     currentMode = mode;
 
-    document
-    .querySelectorAll(".tab")
-    .forEach(tab =>
-        tab.classList.remove("active")
-    );
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+    });
 
-    document
-    .querySelector(`[data-mode="${mode}"]`)
-    .classList.add("active");
+    const activeTab =
+        document.querySelector(`[data-mode="${mode}"]`);
+
+    if (activeTab) {
+        activeTab.classList.add("active");
+    }
 
     renderLeaderboard();
 }
 
 document
 .getElementById("search")
-.addEventListener("input", e => {
+.addEventListener("input", function(e) {
 
-    const value =
-    e.target.value.toLowerCase();
+    const value = e.target.value.toLowerCase();
 
     const leaderboard =
     document.getElementById("leaderboard");
 
     leaderboard.innerHTML = "";
 
-    const results =
-    players.filter(player =>
-        player.name
-        .toLowerCase()
-        .includes(value)
+    const results = players.filter(player =>
+        player.name.toLowerCase().includes(value)
     );
 
-    if(results.length === 0){
+    if (value === "") {
+        renderLeaderboard();
+        return;
+    }
+
+    if (results.length === 0) {
 
         leaderboard.innerHTML = `
         <div class="player empty">
